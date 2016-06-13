@@ -1,0 +1,93 @@
+﻿<Window x:Name="Craps" x:Class="graychw4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:graychw4"
+        mc:Ignorable="d"
+        Title="Game of Craps" Height="469.149" Width="525" ResizeMode="CanMinimize">
+
+    <Grid x:Name="GamePlayGrid" Height="395" Margin="0,34,269,0" VerticalAlignment="Top" RenderTransformOrigin="0.478,0.5" HorizontalAlignment="Right" Width="240">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="197*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="198*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="RollDiceButton" Content="Roll Dice" HorizontalAlignment="Left" Margin="55,15,0,0" VerticalAlignment="Top" Width="135" Height="36" RenderTransformOrigin="0.795,0.446" FontFamily="Sitka Small" Padding="1,6,1,1" FontSize="14.667" Click="RollDiceButton_Click" IsEnabled="False"/>
+        <Button x:Name="PlayAgainButton" Content="Play Again" HorizontalAlignment="Left" Margin="55,131,0,0" VerticalAlignment="Top" Width="135" Height="36" RenderTransformOrigin="0.795,0.446" FontFamily="Sitka Small" Padding="1,2,1,1" FontSize="14.667" Grid.Row="3" IsEnabled="False" Click="PlayAgainButton_Click"/>
+        <Button x:Name="Betbutton" Content="Bet" HorizontalAlignment="Left" Margin="160,126,0,0" VerticalAlignment="Top" Width="30" Click="Betbutton_Click" IsEnabled="False"/>
+        <Grid x:Name="DiceInfoGrid" HorizontalAlignment="Left" Height="196" Margin="244,0,-274,0" VerticalAlignment="Top" Width="270">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox x:Name="CurrentRollgroupBox" Header="Current Roll" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="176" Width="229">
+                <TextBox x:Name="Die2textBox" HorizontalAlignment="Left" Height="23" Margin="81,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+            </GroupBox>
+            <TextBox x:Name="Die1textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="97,46,0,0" RenderTransformOrigin="0.504,0.933" IsReadOnly="True"/>
+            <TextBox x:Name="TotaltextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="97,139,0,0" IsReadOnly="True"/>
+            <Label x:Name="Die1label" Content="Die 1" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
+            <Label x:Name="Die2label" Content="Die 2" HorizontalAlignment="Left" Margin="35,85,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.452,0.573"/>
+            <Label x:Name="Totallabel" Content="Total" HorizontalAlignment="Left" Margin="35,139,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid x:Name="WinTotalGrid_" HorizontalAlignment="Left" Height="193" Margin="244,0,-274,0" Grid.Row="3" VerticalAlignment="Top" Width="270">
+            <GroupBox x:Name="WinTotalgroupBox" Header="Win Totals" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="117" Width="228">
+                <TextBox x:Name="HouseWintextBox" HorizontalAlignment="Left" Height="23" Margin="123,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" IsReadOnly="True"/>
+            </GroupBox>
+            <Label x:Name="PlayerWinslabel" Content="Player win count" HorizontalAlignment="Left" Margin="16,98,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="HouseWinslabel" Content="House win count" HorizontalAlignment="Left" Margin="17,143,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="PlayerWintextBox" HorizontalAlignment="Left" Height="23" Margin="138,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" IsReadOnly="True"/>
+            <GroupBox x:Name="BankAcountgroupBox" Header="Account Balance" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="61" Width="228">
+                <TextBox x:Name="AccountBalanceTextBox" HorizontalAlignment="Left" Height="23" Margin="84,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+            </GroupBox>
+        </Grid>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="526" Margin="-12,-34,-274,0">
+            <MenuItem x:Name="GameMenuItem" Header="   Game" Width="61" Padding="10,0,6,0" Height="29">
+                <MenuItem x:Name="StartMenu" Header="_Start" Click="StartMenu_Click" InputGestureText="Ctrl+S"/>
+                <MenuItem x:Name="ResetMenu" Header="Reset" Click="ResetMenu_Click" IsEnabled="False"/>
+                <MenuItem Header="Exit" Click="ExitMenu_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="HelpMenuItem" Header=" Help" Width="50" Margin="0">
+                <MenuItem x:Name="AboutMenu" Header="About" Click="AboutMenu_Click"/>
+                <MenuItem x:Name="RulesMenu" Header="Rules" Click="RulesMenu_Click"/>
+            </MenuItem>
+        </Menu>
+        <TextBox x:Name="PointTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Margin="114,63,0,0" IsReadOnly="True"/>
+        <Label x:Name="PointLabel" Content="Point" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.842,3.502" Margin="55,67,0,0" Width="54" ClipToBounds="True" Height="26"/>
+        <Label x:Name="WinnerLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.489" Margin="55,165,0,0" Height="67" Width="135" Grid.RowSpan="4" IsEnabled="False" HorizontalContentAlignment="Center" FontFamily="Impact" FontSize="26.667" FontWeight="Bold"/>
+        <Label x:Name="Betlabel" Content="Bet Amount" HorizontalAlignment="Left" Margin="55,101,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="BetTextBox" 
+                 HorizontalAlignment="Left" 
+                 Height="23" Margin="134,98,0,0" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="56"/>
+        <Grid x:Name="DialogBox" Margin="-12,-5,-274,-13" Grid.RowSpan="4" Visibility="Collapsed">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border MinWidth="250"
+                    Background="White" 
+                    BorderBrush="Black" 
+                    BorderThickness="1,1" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" Margin="145,156,131,146" Height="111" Width="230"/>
+            <Button x:Name="confirmationbutton" Content="Confim" Margin="336,233,145,161" Click="confirmationbutton_Click" IsCancel="True"/>
+            <Label x:Name="BankAccountLabel" Content="Please enter a starting amount" Margin="158,174,194,212" UseLayoutRounding="False" />
+            <TextBox x:Name="UserAmountTextBox" 
+                     Margin="176,206,176,187" />
+        </Grid>
+        <Grid x:Name="GameOverBox" Margin="-12,-5,-274,-13" Grid.RowSpan="4" Visibility="Collapsed">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border MinWidth="250"
+                    Background="White" 
+                    BorderBrush="Black" 
+                    BorderThickness="1,1" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" Margin="145,156,131,146" Height="111" Width="230"/>
+            <Button x:Name="startOverButton" Content="Start" Margin="260,233,221,161" Click="startOverButton_Click"/>
+            <Button x:Name="GameoverQuitButton" Margin="321,233,161,161" Content="Quit" Click="GameoverQuitButton_Click" />
+            <Label x:Name="gameOverLabel" Content="Would you like to start a new game?" Margin="161,191,161,195" UseLayoutRounding="False" />
+        </Grid>
+        
+    </Grid>
+</Window>
